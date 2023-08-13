@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<template id="template-quiz-card" class="card container-md">
-    <div class="card-body">
-        <h5 class="card-title text-center">Card title</h5>
-    </div>
-    <div class="container-fluid text-center">
-        <div class="row">
-            <button id="answer-a" class="btn btn-light col-sm-12 col-md-6">Option A</button>
-            <button id="answer-b" class="btn btn-light col-sm-12 col-md-6">Option B</button>
+<template id="template-quiz-card">
+    <div class="card container-md">
+        <div class="card-body">
+            <h5 class="card-title text-center">Card title</h5>
         </div>
-        <div class="row">
-            <button id="answer-c" class="btn btn-light col-sm-12 col-md-6">Option C</button>
-            <button id="answer-d" class="btn btn-light col-sm-12 col-md-6">Option D</button>
+        <div class="container-fluid text-center">
+            <div class="row">
+                <button id="answer-a" onclick="onCorrectAnswerEvent(event)" class="btn btn-light col-sm-12 col-md-6">Option A</button>
+                <button id="answer-b" onclick="onCorrectAnswerEvent(event)" class="btn btn-light col-sm-12 col-md-6">Option B</button>
+            </div>
+            <div class="row">
+                <button id="answer-c" onclick="onCorrectAnswerEvent(event)" class="btn btn-light col-sm-12 col-md-6">Option C</button>
+                <button id="answer-d" onclick="onCorrectAnswerEvent(event)" class="btn btn-light col-sm-12 col-md-6">Option D</button>
+            </div>
         </div>
-    </div>
-    <div class="card-body text-center">
-        <button type="button" class="btn btn-primary">Submit</button>
-        <button onclick="getQuestion()" type="button" class="btn btn-primary">Hint?</button>
+        <div class="card-body text-center">
+            <button onclick="loadQuizQuestion()" type="button" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary">Hint?</button>
+        </div>
     </div>
 </template>
 
@@ -35,6 +37,6 @@
     <script src="../scripts/script.js"></script>
 </head>
 
-<body class style="display:flex; justify-content: center; align-items: center;">
+<body onload="loadQuizQuestion()" class style="display:flex; justify-content: center; align-items: center;">
 </body>
 </html>
