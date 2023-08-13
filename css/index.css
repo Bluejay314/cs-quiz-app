@@ -1,0 +1,45 @@
+:root {
+    --fs-xl: 5rem;
+    --fx-l: 3rem;
+    --fx-m: 1.5rem;
+    --fx-s: 1rem;
+
+    --color-dark-blue:#29344d;
+    --color-light-green: #A6d49f;
+    --color-light-blue: #91c4f2;
+    --color-text-light: rgb(224, 224, 224);
+}
+
+body {
+    background-color: var(--color-dark-blue); 
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    position: absolute;
+    inset: 0;
+    margin: 0 20%;
+    text-align: center;
+}
+
+h1 {
+    font-size: var(--fs-xl);
+    color: var(--color-light-green);
+    font-weight: 700;
+}
+
+section {
+    font-size: var(--fx-m);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+}
+
+p {
+    color: var(--color-text-light);
+}
