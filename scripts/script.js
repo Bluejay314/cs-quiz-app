@@ -19,3 +19,7 @@ function loadQuizQuestion() {
         })
 }
 
+function onCorrectAnswerEvent(event) {
+    event.target.classList.toggle("button-selected");
+}
+
