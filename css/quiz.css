@@ -77,3 +77,15 @@ footer::after {
     font-family: 'Anton', sans-serif;
     color: white;
 }
+
+#quiz-end {
+    font-size: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#quiz-end button {
+    font-size: 1.5rem;
+}

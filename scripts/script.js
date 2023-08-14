@@ -1,10 +1,10 @@
 
-let previousScores = []; // Stores any atempt the player has made previously
+let previousScores = [5, 7, 10, 12, 12, 5, 13]; // Stores any atempt the player has made previously
 let difficulty = "easy"; // easy, medium , hard
 let numQuestions = 1;    // Number of questions that have been asked
 let difficultyInc = 7;   // Difficulty changes after every multiple of this
 let numCorrect = 0;      // Number of correct answers by the player
-let numAttempts = 3;     // The number of attempts the user is allowed to fail
+let numAttempts = 0;     // The number of attempts the user is allowed to fail
 let selected;            // The question selected by the player
 let correctAnswer;       // The correct answer to the current question
 
@@ -18,48 +18,53 @@ function loadQuizQuestion() {
     //document.querySelector("body").innerHTML = "";
     const firstElement = document.body.firstElementChild;
     document.body.innerHTML = "";
-    document.body.appendChild(firstElement);
 
     // If the player has run out of attempts, reset the quiz
     if(numAttempts <= 0) {
-        reset();
+        const template = document.getElementById("template-quiz-end").content.cloneNode(true);
+        template.querySelector("#final-score").innerText = numCorrect;
+        document.querySelector("body").appendChild(template);
     }
-    
-    // Change the difficulty based on the number of questions answered
-    if(numQuestions > difficultyInc*2)
+    else {
+        // Add back the loading element
+        document.body.appendChild(firstElement);
+
+        // Change the difficulty based on the number of questions answered
+        if(numQuestions > difficultyInc*2)
         difficulty = "hard";
-    else if(numQuestions > difficultyInc)
-        difficulty = "medium";
-    else 
-        difficulty = "easy";
+        else if(numQuestions > difficultyInc)
+            difficulty = "medium";
+        else 
+            difficulty = "easy";
 
-    // Fetch the next question based on the given difficulty
-    axios.get(`https://opentdb.com/api.php?amount=1&category=18&difficulty=${difficulty}&type=multiple`)
-        .then(response => {
-            const data = response.data.results[0];
+        // Fetch the next question based on the given difficulty
+        axios.get(`https://opentdb.com/api.php?amount=1&category=18&difficulty=${difficulty}&type=multiple`)
+            .then(response => {
+                const data = response.data.results[0];
 
-            console.log(data);
-            console.log(`difficulty: ${difficulty}`);
-            console.log(`answer: ${data["correct_answer"]}`);
-            
-            //This pools all options and randomly swaps their positions
-            let options = [...data["incorrect_answers"], data["correct_answer"]];
-            swapRandomElements(options, 8); 
+                console.log(data);
+                console.log(`difficulty: ${difficulty}`);
+                console.log(`answer: ${data["correct_answer"]}`);
+                
+                //This pools all options and randomly swaps their positions
+                let options = [...data["incorrect_answers"], data["correct_answer"]];
+                swapRandomElements(options, 8); 
 
-            const template = document.getElementById("template-quiz-card").content.cloneNode(true);
-            template.querySelector("#attempts-count").innerHTML = "&#10060".repeat(numAttempts);
-            template.querySelector(".card-title").innerHTML = data["question"];
-            template.querySelector("#answer-a").innerText = options[0];
-            template.querySelector("#answer-b").innerText = options[1];
-            template.querySelector("#answer-c").innerText = options[2];
-            template.querySelector("#answer-d").innerText = options[3];
-            template.querySelector("#answer-count").innerText = numCorrect;
+                const template = document.getElementById("template-quiz-card").content.cloneNode(true);
+                template.querySelector("#attempts-count").innerHTML = "&#10060".repeat(numAttempts);
+                template.querySelector(".card-title").innerHTML = data["question"];
+                template.querySelector("#answer-a").innerText = options[0];
+                template.querySelector("#answer-b").innerText = options[1];
+                template.querySelector("#answer-c").innerText = options[2];
+                template.querySelector("#answer-d").innerText = options[3];
+                template.querySelector("#answer-count").innerText = numCorrect;
 
-            correctAnswer = data["correct_answer"];
-            document.querySelector("#loading").style.display = "none";
-            document.querySelector("body").appendChild(template);
-        })
-        .catch(error => console.log(error));
+                correctAnswer = data["correct_answer"];
+                document.querySelector("#loading").style.display = "none";
+                document.querySelector("body").appendChild(template);
+            })
+            .catch(error => console.log(error));
+    }
 }
 
 /*
