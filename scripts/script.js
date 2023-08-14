@@ -13,13 +13,16 @@ let correctAnswer;       // The correct answer to the current question
   into a template and displayed.
 */
 function loadQuizQuestion() {
+    document.querySelector("#loading").style.display = "block";
     // Reset the displaying container to remove the last question
+    //document.querySelector("body").innerHTML = "";
+    const firstElement = document.body.firstElementChild;
     document.body.innerHTML = "";
+    document.body.appendChild(firstElement);
 
     // If the player has run out of attempts, reset the quiz
     if(numAttempts <= 0) {
         reset();
-        
     }
     
     // Change the difficulty based on the number of questions answered
@@ -53,6 +56,7 @@ function loadQuizQuestion() {
             template.querySelector("#answer-count").innerText = numCorrect;
 
             correctAnswer = data["correct_answer"];
+            document.querySelector("#loading").style.display = "none";
             document.querySelector("body").appendChild(template);
         })
         .catch(error => console.log(error));

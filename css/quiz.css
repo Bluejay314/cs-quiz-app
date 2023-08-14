@@ -2,10 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 body {
+    position: relative;
     display:flex; 
     justify-content: center; 
     align-items: center;
     font-family: 'Inter', sans-serif;
+}
+
+#loading {
+    width: 15rem;
+    height: 15rem;
 }
 
 .card {
