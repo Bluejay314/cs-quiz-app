@@ -7,7 +7,8 @@ function loadQuizQuestion() {
     axios.get(`https://opentdb.com/api.php?amount=1&category=18&difficulty=${difficulty}&type=${choiceType}`)
         .then(response => {
             const data = response.data.results[0];
-            
+            correctAnswer = data["correct_answer"];
+
             const template = document.getElementById("template-quiz-card").content.cloneNode(true);
             template.querySelector(".card-title").innerHTML = data["question"];
             template.querySelector("#answer-a").innerHTML = data["incorrect_answers"][0];
@@ -15,9 +16,7 @@ function loadQuizQuestion() {
             template.querySelector("#answer-c").innerHTML = data["correct_answer"];
             template.querySelector("#answer-d").innerHTML = data["incorrect_answers"][2];
 
-            correctAnswer = data["correct_answer"];
-            document.querySelector("body").appendChild(template);
-            
+            document.querySelector("body").appendChild(template);            
         })
 }
 
