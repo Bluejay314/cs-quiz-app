@@ -1,7 +1,13 @@
+body {
+    display:flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
 .card {
     border-radius: 2rem;
     gap: 2rem;
-    
+    overflow: hidden;
 }
 
 .button-selected {
