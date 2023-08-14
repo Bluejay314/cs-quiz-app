@@ -1,5 +1,6 @@
 
 let difficulty = "easy"; // easy, medium , hard
+let numQuestions = 0;    // Number of questions that have been asked
 let numCorrect = 0;      // Number of correct answers by the player
 let numAttempts = 1;     // The number of attempts the user is allowed to fail
 let selected;            // The question selected by the player
@@ -9,12 +10,8 @@ function loadQuizQuestion() {
     // Reset the displaying container to remove the last question
     document.body.innerHTML = "";
 
-    if(numAttempts <= 0) {
-        numAttempts = 3;
-        numCorrect = 0;
-        selected = null;
+    if(numAttempts <= 0)
         location.assign("../index.html")
-    }
 
     // Fetch the next question based on the given difficulty
     axios.get(`https://opentdb.com/api.php?amount=1&category=18&difficulty=${difficulty}&type=multiple`)
