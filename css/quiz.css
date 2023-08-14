@@ -52,7 +52,7 @@ header, footer {
 footer::after {
     content: '';
     position: absolute;
-    top: 100%;
+    top: 80%;
     width: 35%;
     height: 0.25rem;
     background-color: var(--color-light-blue);
