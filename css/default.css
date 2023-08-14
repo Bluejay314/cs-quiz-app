@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
-
 :root {
     --fs-xl: 5rem;
     --fx-l: 3rem;
@@ -13,13 +11,5 @@
 }
 
 body {
-    background-color: var(--color-dark-blue); 
-}
-
-.button-selected {
-    background-color: rgb(105, 148, 105);
-}
-
-h1 {
-    font-family: 'Lilita One';
+    background-color: var(--color-dark-blue);
 }
