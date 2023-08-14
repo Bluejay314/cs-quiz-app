@@ -1,12 +1,9 @@
 .card {
-    height: 40vh;
+    border-radius: 2rem;
+    gap: 2rem;
     
 }
 
-
-.card-title {
-}
-
 .button-selected {
-    background-color: rgb(105, 148, 105);
+    background-color: var(--color-light-green);
 }
