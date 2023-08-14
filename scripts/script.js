@@ -1,10 +1,10 @@
 
-let previousScores = [5, 7, 10, 12, 12, 5, 13]; // Stores any atempt the player has made previously
+let previousScores = [2, 4, 5]; // Stores any atempt the player has made previously
 let difficulty = "easy"; // easy, medium , hard
 let numQuestions = 1;    // Number of questions that have been asked
 let difficultyInc = 7;   // Difficulty changes after every multiple of this
 let numCorrect = 0;      // Number of correct answers by the player
-let numAttempts = 0;     // The number of attempts the user is allowed to fail
+let numAttempts = 3;     // The number of attempts the user is allowed to fail
 let selected;            // The question selected by the player
 let correctAnswer;       // The correct answer to the current question
 
@@ -13,21 +13,25 @@ let correctAnswer;       // The correct answer to the current question
   into a template and displayed.
 */
 function loadQuizQuestion() {
-    document.querySelector("#loading").style.display = "block";
     // Reset the displaying container to remove the last question
-    //document.querySelector("body").innerHTML = "";
-    const firstElement = document.body.firstElementChild;
     document.body.innerHTML = "";
-
+    
     // If the player has run out of attempts, reset the quiz
     if(numAttempts <= 0) {
+        // Add the score to the list of previous scores
+        previousScores.push(numCorrect);
+
+        // Load the end page and build the chart
         const template = document.getElementById("template-quiz-end").content.cloneNode(true);
         template.querySelector("#final-score").innerText = numCorrect;
         document.querySelector("body").appendChild(template);
+        makeChart();
     }
     else {
-        // Add back the loading element
-        document.body.appendChild(firstElement);
+        // Add the loading element
+        document.body.append(document.getElementById("template-spinner").content.cloneNode(true));
+        let spinner = document.querySelector("#loading")
+        spinner.style.display = "block";
 
         // Change the difficulty based on the number of questions answered
         if(numQuestions > difficultyInc*2)
@@ -60,7 +64,7 @@ function loadQuizQuestion() {
                 template.querySelector("#answer-count").innerText = numCorrect;
 
                 correctAnswer = data["correct_answer"];
-                document.querySelector("#loading").style.display = "none";
+                spinner.style.display = "none";
                 document.querySelector("body").appendChild(template);
             })
             .catch(error => console.log(error));
@@ -132,3 +136,31 @@ function swapRandomElements(arr, numTimes) {
     }
 }
 
+function makeChart() {
+    // Initialize the echarts instance based on the prepared dom
+    const resultChart = echarts.init(document.getElementById('chart-display'));
+
+    // Specify the configuration items and data for the chart
+    let options = {
+        title: {
+            text: "Past Scores",
+            left: "center"
+        },
+        xAxis: {
+            type: 'category',
+            show: false,
+            // Generates a sequence of numbers equal to the number of scores
+            data: previousScores.map((_, index) => index),
+          },
+        yAxis: {
+            type: "value"
+        },
+        series: {
+            name: 'Sales June',
+            type: 'line',
+            data: previousScores
+        }               
+    };
+
+    resultChart.setOption(options);
+}
