@@ -8,7 +8,7 @@ function loadQuizQuestion() {
         .then(response => {
             const data = response.data.results[0];
             let options = [...data["incorrect_answers"], data["correct_answer"]];
-            swapRandomElements(options, 4);
+            swapRandomElements(options, 8);
             console.log(data["correct_answer"]);
 
             const template = document.getElementById("template-quiz-card").content.cloneNode(true);
@@ -21,6 +21,7 @@ function loadQuizQuestion() {
             correctAnswer = data["correct_answer"];
             document.querySelector("body").appendChild(template);
         })
+        .catch(error => console.log(error));
 }
 
 function onSelectEvent(event) {
