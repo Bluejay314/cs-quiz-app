@@ -16,10 +16,6 @@ body {
     background-color: var(--color-dark-blue); 
 }
 
-.button-selected {
-    background-color: rgb(105, 148, 105);
-}
-
 h1 {
     font-family: 'Lilita One';
 }
