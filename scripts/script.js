@@ -1,5 +1,7 @@
 let choiceType = "multiple";
 let difficulty = "easy";
+let selected;
+let correctAnswer;
 
 function loadQuizQuestion() {
     axios.get(`https://opentdb.com/api.php?amount=1&category=18&difficulty=${difficulty}&type=${choiceType}`)
@@ -13,12 +15,24 @@ function loadQuizQuestion() {
             template.querySelector("#answer-c").innerHTML = data["correct_answer"];
             template.querySelector("#answer-d").innerHTML = data["incorrect_answers"][2];
 
+            correctAnswer = data["correct_answer"];
             document.querySelector("body").appendChild(template);
             
         })
 }
 
-function onCorrectAnswerEvent(event) {
+function onSelectEvent(event) {
+    if(selected)
+        selected.classList.remove("button-selected");
+
     event.target.classList.toggle("button-selected");
+    selected = event.target;
+}
+
+function onAnswerSubmitEvent(event) {
+    if(selected.innerHTML == correctAnswer)
+        console.log("correct");
+    else
+        console.log("wrong");
 }
 
