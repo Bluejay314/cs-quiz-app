@@ -4,18 +4,15 @@
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 3rem;
-    position: absolute;
-    inset: 0;
-    margin: 0 20%;
+    margin: 10% 20%;
     text-align: center;
     font-family: 'Work Sans', sans-serif;
 }
 
 h1 {
     font-family: 'Lilita One';
-    font-size: 6.5rem;
+    font-size: 5.5rem;
     font-weight: 700;
     color: var(--color-light-green);
     text-shadow: 3px 3px rgb(14, 40, 22), 5px 5px 5px rgb(80, 88, 83);
@@ -33,6 +30,7 @@ section {
 #button-play {
     font-size: 1.5rem;
     font-weight: 700;
+    color: var(--color-text-light);
     text-decoration: none;
     background-color: var(--color-light-blue);
     border-radius: 1rem;
@@ -47,7 +45,7 @@ h2 {
 }
 
 p {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     color: var(--color-text-light);
     max-width: 70%;
 }
